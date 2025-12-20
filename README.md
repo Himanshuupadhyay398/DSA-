@@ -1,2 +1,4 @@
-# DSA-
-The process of consistency and Improvement In Tech 
+
+# DSA – LeetCode Solutions
+
+This repository contains my LeetCode problem solutions.
