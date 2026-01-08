@@ -1,16 +1,7 @@
 # Write your MySQL query statement below
-SELECT 
-    p.product_id,
-    COALESCE(
-        (
-            SELECT new_price 
-            FROM Products p2 
-            WHERE p2.product_id = p.product_id
-              AND p2.change_date <= '2019-08-16'
-            ORDER BY p2.change_date DESC
-            LIMIT 1
-        ), 
-        10
-    ) AS price
-FROM 
-    (SELECT DISTINCT product_id FROM Products) AS p;
+
+select product_id,10 as price from products group by product_id having min(change_date)>'2019-08-16'
+union all select p.product_id,p.new_price as price from products P inner join(
+    select product_id,max(change_date) as max_date from products where change_date<='2019-08-16'
+    group by product_id
+) as R on P.product_id=R.product_id and P.change_date = R.max_date;
