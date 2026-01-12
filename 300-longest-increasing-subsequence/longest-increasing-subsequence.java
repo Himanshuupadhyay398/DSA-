@@ -1,5 +1,8 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
+
+        //bottom up 
+
         int n = nums.length;
         int []dp=new int[n];
         Arrays.fill(dp,1);
@@ -14,6 +17,7 @@ class Solution {
         }
     return max;
     }
+    
     //memoization
 
     //     dp = new int[n][n + 1];
