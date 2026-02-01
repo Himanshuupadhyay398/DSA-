@@ -1,15 +1,16 @@
 class Solution {
     public int minimumCost(int[] nums) {
         int n=nums.length;
-        int number=nums[0];
-        Arrays.sort(nums);
-        if(number==nums[0]){
-            number+=nums[1]+nums[2];
-        }else if(number==nums[1]){
-            number+=nums[0]+nums[2];
-        }else{
-            number+=nums[0]+nums[1];
+        int min1=Integer.MAX_VALUE;
+        int min2=Integer.MAX_VALUE;
+        for(int i=1;i<n;i++){
+            if(nums[i]<min1){
+                min2=min1;
+                min1=nums[i];
+            }else if(nums[i]<min2){
+                min2=nums[i];
+            }
         }
-    return number;
+    return nums[0]+min1+min2;
     }
 }
