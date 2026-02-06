@@ -2,12 +2,14 @@ class Solution {
     public int minRemoval(int[] nums, int k) {
         int n=nums.length;
         Arrays.sort(nums);
-        int j=0,len=0;
-        for(int i=0;i<n;i++){
-            while(nums[i]>(long)nums[j]*k){
+        int j=0,len=0,i=0;
+        while(j<n){
+            if(nums[j]<=(long)nums[i]*k){
+                len=Math.max(len,j-i+1);
                 j++;
+            }else{
+                i++;
             }
-            len=Math.max(len,i-j+1);
         }
     return n-len;
     }
