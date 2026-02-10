@@ -5,11 +5,11 @@ class Solution {
         return result;
     }
     public void recurse(int i,List<List<Integer>> result,int n,int k,ArrayList<Integer>al){
-        if(i>n+1){
-            return;
-        }
         if(al.size()==k){
             result.add(new ArrayList<>(al));
+            return;
+        }
+        if(i>n){
             return;
         }
         al.add(i);
