@@ -14,20 +14,14 @@
  * }
  */
 class Solution {
-    int sum=0;
     public int sumRootToLeaf(TreeNode root) {
-        String str="";
-        preorder(root,str);
-    return sum;
+        
+    return dfs(root,0);
     }
-    public void preorder(TreeNode root,String str){
-        if(root==null) return;
-        str=str+root.val;
-        if(root.left==null && root.right==null){
-            sum+=Integer.parseInt(str,2);
-            return;
-        }
-        preorder(root.left,str);
-        preorder(root.right,str);
+    public int dfs(TreeNode root,int sum){
+        if(root==null) return 0;
+        sum=sum*2+root.val;
+        if(root.left==null && root.right==null) return sum;
+        return dfs(root.left,sum)+dfs(root.right,sum);
     }
 }
