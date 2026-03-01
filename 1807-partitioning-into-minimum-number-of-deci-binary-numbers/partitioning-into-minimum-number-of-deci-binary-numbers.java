@@ -3,6 +3,9 @@ class Solution {
         int max=0;
         for(int i=0;i<n.length();i++){
             max=Math.max(max,n.charAt(i)-'0');
+            if((n.charAt(i)-'0')==9){
+                return 9;
+            }
         }
     return max;
     }
