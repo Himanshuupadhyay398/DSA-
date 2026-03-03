@@ -1,23 +1,16 @@
 class Solution {
     public char findKthBit(int n, int k) {
-        StringBuilder str=new StringBuilder();
-        str.append('0');
-        for(int i=1;i<n;i++){
-            StringBuilder invt=invert(new StringBuilder(str));
-            str.append('1');
-            str.append(invt.reverse());
-        }
+        if(n==1) return '0';
 
-        return str.charAt(k-1);
-    }
-    public StringBuilder invert(StringBuilder str){
-        for(int i=0;i<str.length();i++){
-            if(str.charAt(i)=='1'){
-                str.setCharAt(i, '0');
-            } else {
-                str.setCharAt(i, '1');
-            }
+        int len=(1<<n)-1;
+
+        if(k < Math.ceil(len/2.0)){
+            return findKthBit(n-1,k);
+        }else if(k == Math.ceil(len/2.0)){
+            return '1';
+        }else{
+            char ch=findKthBit(n-1,len-(k-1));
+            return (ch=='0')?'1':'0';
         }
-    return str;
     }
 }
