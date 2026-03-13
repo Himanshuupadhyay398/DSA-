@@ -21,7 +21,7 @@ class Solution {
     public boolean check(long mid,int mountainHeight, int[] workerTimes){
         long height=0;
         for(int t:workerTimes){
-            height+=(long)(Math.sqrt(2.0*mid/t+0.25)-0.5);
+            height+=(long)(Math.sqrt(2*mid/t+0.25)-0.5);
 
             if(height>=mountainHeight) return true;
 
