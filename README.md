@@ -1,4 +1,5 @@
 
 # DSA – LeetCode Solutions
 
-This repository contains my LeetCode problem solutions.
+This repository contain Problem that was solve on Leetcode .
+
