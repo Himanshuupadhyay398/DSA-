@@ -10,7 +10,7 @@ class Solution {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
                 if (visited[i][j] == 0) {
-                    if(dfs(grid, visited, i, j, -1, -1, grid[i][j])){
+                    if (dfs(grid, visited, i, j, -1, -1, grid[i][j])) {
                         return true;
                     }
                 }
@@ -30,16 +30,16 @@ class Solution {
             int nx = i + dx[d];
             int ny = j + dy[d];
 
-            if(nx>=0 && ny>=0 && nx<n && ny<m && grid[nx][ny]==prev){
-                if(visited[nx][ny]==0){
-                    if(dfs(grid,visited,nx,ny,i,j,prev)){
+            if (nx >= 0 && ny >= 0 && nx < n && ny < m && grid[nx][ny] == prev) {
+                if (visited[nx][ny] == 0) {
+                    if (dfs(grid, visited, nx, ny, i, j, prev)) {
                         return true;
                     }
-                }else if(nx!=pi || ny!=pj){
+                } else if (nx != pi || ny != pj) {
                     return true;
                 }
             }
         }
-    return false;
+        return false;
     }
 }
