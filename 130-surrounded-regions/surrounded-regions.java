@@ -24,18 +24,28 @@ class Solution {
         int n=board.length;
         int m=board[0].length;
 
-        int dx[]={1,-1,0,0};
-        int dy[]={0,0,1,-1};
+        // int dx[]={1,-1,0,0};
+        // int dy[]={0,0,1,-1};
         
+        // board[i][j]='#';
+
+        // for(int k=0;k<4;k++){
+        //     int nrow=i+dx[k];
+        //     int ncol=j+dy[k];
+
+        //     if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && board[nrow][ncol]=='O'){
+        //         dfs(board,nrow,ncol);
+        //     }
+        // }
+        if(i<0 || i>=n || j<0 || j>=m || board[i][j]=='X' || board[i][j]=='#'){
+            return;
+        }
         board[i][j]='#';
 
-        for(int k=0;k<4;k++){
-            int nrow=i+dx[k];
-            int ncol=j+dy[k];
+        dfs(board,i+1,j);
+        dfs(board,i,j+1);
+        dfs(board,i-1,j);
+        dfs(board,i,j-1);
 
-            if(nrow>=0 && ncol>=0 && nrow<n && ncol<m && board[nrow][ncol]=='O'){
-                dfs(board,nrow,ncol);
-            }
-        }
     }
 }
