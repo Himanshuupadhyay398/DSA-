@@ -1,30 +1,21 @@
 class Solution {
     public int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
-        int ans=Integer.MAX_VALUE;
+        return Math.min(find(landStartTime,landDuration,waterStartTime,waterDuration)
+        ,find(waterStartTime,waterDuration,landStartTime,landDuration));
+    }
 
-        int n=landStartTime.length;
-        int m=waterStartTime.length;
+    public int find(int ls[], int ld[], int ws[], int wd[]) {
 
-        for (int i = 0; i < n; i++) {
-            int landFinish = landStartTime[i] + landDuration[i];
+        int min = Integer.MAX_VALUE;
 
-            for (int j = 0; j < m; j++) {
-                ans = Math.min(ans,
-                        Math.max(landFinish, waterStartTime[j])
-                        + waterDuration[j]);
-            }
+        for (int i = 0; i < ls.length; i++) {
+            min = Math.min(min, ls[i] + ld[i]);
         }
 
-        for (int i = 0; i < m; i++) {
-            int waterFinish = waterStartTime[i] + waterDuration[i];
-
-            for (int j = 0; j < n; j++) {
-                ans = Math.min(ans,
-                        Math.max(waterFinish, landStartTime[j])
-                        + landDuration[j]);
-            }
+        int result = Integer.MAX_VALUE;
+        for (int i = 0; i < ws.length; i++) {
+            result = Math.min(result, Math.max(min, ws[i]) + wd[i]);
         }
-
-    return ans;
+        return result;
     }
 }
