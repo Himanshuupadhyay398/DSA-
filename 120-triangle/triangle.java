@@ -2,21 +2,28 @@ class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         int n=triangle.size();
         int dp[][]=new int[n][n];
+        
         for(int i=0;i<n;i++){
-            Arrays.fill(dp[i],Integer.MAX_VALUE);
+            dp[n-1][i]=triangle.get(n-1).get(i);
         }
-        return recurse(triangle,dp,0,0,n);
-       
+      
+        for(int i=n-2;i>=0;i--){
+            for(int j=0;j<=i;j++){
+                dp[i][j]=triangle.get(i).get(j)+Math.min(dp[i+1][j],dp[i+1][j+1]);
+               
+            }
+        }
+    return dp[0][0];
     }
-    public int recurse(List<List<Integer>> triangle,int dp[][],int i,int j,int n){
+    // public int recurse(List<List<Integer>> triangle,int dp[][],int i,int j,int n){
 
-        if(i==n-1) return triangle.get(i).get(j);
+    //     if(i==n-1) return triangle.get(i).get(j);
 
-        if(dp[i][j]!=Integer.MAX_VALUE) return dp[i][j];
+    //     if(dp[i][j]!=Integer.MAX_VALUE) return dp[i][j];
 
-        int take=recurse(triangle,dp,i+1,j,n);
-        int skip=recurse(triangle,dp,i+1,j+1,n);
+    //     int take=recurse(triangle,dp,i+1,j,n);
+    //     int skip=recurse(triangle,dp,i+1,j+1,n);
 
-        return dp[i][j]=triangle.get(i).get(j)+Math.min(take,skip);
-    } 
+    //     return dp[i][j]=triangle.get(i).get(j)+Math.min(take,skip);
+    // } 
 }
