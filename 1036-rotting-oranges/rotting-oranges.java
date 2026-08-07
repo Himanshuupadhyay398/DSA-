@@ -1,51 +1,44 @@
 class Solution {
     public int orangesRotting(int[][] grid) {
-        if (grid.length == 0) return 0;
-
-        int m = grid.length;
-        int n = grid[0].length;
-
-        int total = 0;
-        int count = 0;
-
-        Queue<int[]> rotten = new LinkedList<>();
-
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (grid[i][j] != 0) total++;
-                if (grid[i][j] == 2) rotten.add(new int[]{i, j});
+        int n=grid.length;
+        int m=grid[0].length;
+        Queue<int[]> q=new LinkedList<>();
+        int total=0,count=0;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(grid[i][j]!=0){
+                    total++;
+                }
+                if(grid[i][j]==2) q.add(new int[]{i,j});
             }
         }
 
-        int[] dx = {0, 0, 1, -1};
-        int[] dy = {1, -1, 0, 0};
+        int dx[]={1,0,-1,0};
+        int dy[]={0,1,0,-1};
+        int day=0;
+        while(!q.isEmpty()){
 
-        int days = 0;
+            int rott=q.size();
+            count+=rott;
 
-        while (!rotten.isEmpty()) {
-            int k = rotten.size();
-            count += k;
+            for(int i=0;i<rott;i++){
 
-            for (int i = 0; i < k; i++) {
-                int[] pos = rotten.poll();
-                int x = pos[0], y = pos[1];
+                int curr[]=q.poll();
+                int r=curr[0];
+                int c=curr[1];
 
-                for (int d = 0; d < 4; d++) {
-                    int nx = x + dx[d];
-                    int ny = y + dy[d];
+                for(int k=0;k<4;k++){
+                    int nr=r+dx[k];
+                    int nc=c+dy[k];
 
-                    if (nx < 0 || ny < 0 || nx >= m || ny >= n || grid[nx][ny] != 1)
-                        continue;
-
-                    grid[nx][ny] = 2;
-                    rotten.add(new int[]{nx, ny});
+                    if(nr>=0 && nr<n && nc>=0 && nc<m && grid[nr][nc]==1){
+                        grid[nr][nc]=2;
+                        q.add(new int[]{nr,nc});
+                    }
                 }
             }
-
-            if (!rotten.isEmpty()) days++;
+            if(!q.isEmpty()) day++;
         }
-
-        return total == count ? days : -1;
-
+    return total==count?day:-1;
     }
 }
