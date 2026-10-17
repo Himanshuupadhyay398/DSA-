@@ -1,17 +1,20 @@
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-        int result[]=new int[10001];
+        int n=nums1.length;
+        int n1=nums2.length;
+
         Stack<Integer> stack=new Stack<>();
-        for(int i=nums2.length-1;i>=0;i--){
-            while(!stack.isEmpty() && stack.peek()<=nums2[i]){
+        int arr[]=new int[10000];
+        for(int i=n1-1;i>=0;i--){
+            while(!stack.isEmpty() && stack.peek()<nums2[i]){
                 stack.pop();
             }
-            result[nums2[i]]=stack.isEmpty()?-1:stack.peek();
+            arr[nums2[i]]=stack.isEmpty()?-1:stack.peek();
             stack.push(nums2[i]);
         }
-        for(int i=0;i<nums1.length;i++){
-            nums1[i]=result[nums1[i]];
-        }
+    for(int i=0;i<n;i++){
+        nums1[i]=arr[nums1[i]];
+    }
     return nums1;
     }
 }
