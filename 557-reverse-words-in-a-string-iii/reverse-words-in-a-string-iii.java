@@ -1,33 +1,27 @@
 class Solution {
+    public char[] reverse(char[] arr, int i, int j){
+        while(i < j){
+            char temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+            j--;
+        }
+        return arr;
+    }
     public String reverseWords(String s) {
-        ArrayList<String> lst=new ArrayList<>();
-        int j=-1;
-        for(int i=0;i<s.length();i++){
-            char ch=s.charAt(i);
-            if(ch==' '){
-                String rev=reverse(s.substring(j+1,i));
-                lst.add(rev);
-                j=i;
+        char[] arr = s.toCharArray();
+        int n = arr.length;
+        int i = 0, j = i + 1;
+        while(j < n){
+            if(arr[j] != ' ') j++;
+            else {
+                reverse(arr, i, j - 1);
+                j++;
+                i = j;
             }
         }
-        String rev=reverse(s.substring(j+1,s.length()));
-        lst.add(rev);
-
-        StringBuilder st=new StringBuilder();
-        for(int i=0;i<lst.size();i++){
-            st.append(lst.get(i));
-            st.append(' ');
-        }
-       st.deleteCharAt(st.length() - 1);
-    return st.toString();
-    }
-
-    public String reverse(String original){
-        StringBuilder sb = new StringBuilder();
-        for (int i = original.length() - 1; i >= 0; i--) {
-            sb.append(original.charAt(i));
-        }
-        String reversed = sb.toString();
-    return reversed;
+        reverse(arr, i, j - 1);
+        return new String(arr);
     }
 }
